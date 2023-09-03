@@ -8,5 +8,6 @@ const movieNotesController = new MovieNotesController();
 
 movieNotesRoutes.post("/:user_id", movieNotesController.create);
 movieNotesRoutes.get("/:id", movieNotesController.readOne);
+movieNotesRoutes.get("/", movieNotesController.searchNotes);
 
 module.exports = movieNotesRoutes;
