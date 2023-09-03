@@ -87,6 +87,15 @@ class MovieNotesController {
 
     return res.status(200).json(notesWithTags);
   }
+
+  async delete(req, res) {
+    const { id } = req.params
+
+    await knex("movie_notes").where({ id }).delete()
+
+    return response.json()
+  }
+
 }
 
 module.exports = MovieNotesController;
