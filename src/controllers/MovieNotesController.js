@@ -33,6 +33,17 @@ class MovieNotesController {
 
     return res.status(201).json();
   }
+
+  async readOne(req, res) {
+    const { id } = req.params;
+
+    const note = await knex("movie_notes").where({ id }).first();
+    const movieTags = await knex("movie_tags")
+      .where({ note_id: id })
+      .orderBy("name");
+
+    return res.status(200).json({ ...note, movieTags });
+  }
 }
 
 module.exports = MovieNotesController;
