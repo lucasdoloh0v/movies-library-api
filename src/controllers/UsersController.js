@@ -8,7 +8,6 @@ class UsersControllers {
 
     const userExist = await knex("users").where({ email }).first();
 
-    console.log(userExist);
     if (userExist) {
       throw new Errors("Este e-mail já está em uso", 500);
     }
@@ -26,7 +25,7 @@ class UsersControllers {
 
   async update(req, res) {
     const { name, email, password, old_password: oldPassword } = req.body;
-    const { id } = req.params;
+    const { id } = req.user;
 
     const user = await knex("users").where({ id }).first();
 
