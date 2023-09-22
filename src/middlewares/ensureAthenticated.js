@@ -21,7 +21,7 @@ function ensureAuthenticated(req, res, next) {
 
     return next();
   } catch {
-    throw new Errors('invalid token');
+    throw new Errors('invalid token', 401);
   }
 }
 

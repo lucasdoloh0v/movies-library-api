@@ -6,6 +6,16 @@ const authConfig = require('../configs/auth');
 const { Errors } = require('../utils/errorHandling');
 
 class SessionsController {
+  async getUser(req, res) {
+    const { id } = req.user;
+
+    const userData = await knex('users').where({ id }).first();
+
+    const { password, ...user } = userData;
+
+    return res.json({ user });
+  }
+
   async create(req, res) {
     const { email, password } = req.body;
 
@@ -28,9 +38,7 @@ class SessionsController {
       expiresIn,
     });
 
-    const { password: userPassword, ...userToReturn } = user;
-
-    return res.json({ token, user: userToReturn });
+    return res.json({ token });
   }
 }
 
