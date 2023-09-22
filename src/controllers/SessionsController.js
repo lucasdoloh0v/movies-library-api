@@ -28,7 +28,9 @@ class SessionsController {
       expiresIn,
     });
 
-    return res.json({ token, user });
+    const { password: userPassword, ...userToReturn } = user;
+
+    return res.json({ token, user: userToReturn });
   }
 }
 
