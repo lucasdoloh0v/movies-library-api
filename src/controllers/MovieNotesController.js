@@ -38,6 +38,11 @@ class MovieNotesController {
     const { id } = req.params;
 
     const note = await knex('movie_notes').where({ id }).first();
+
+    if(!note) {
+      throw new Errors("Not Found", 404)
+    }
+    
     const movieTags = await knex('movie_tags')
       .where({ note_id: id })
       .orderBy('name');
