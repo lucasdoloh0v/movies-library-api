@@ -1,3 +1,4 @@
+require('dotenv/config')
 require('express-async-errors');
 const express = require('express');
 const cors = require('cors');
@@ -16,5 +17,5 @@ app.use('/files', express.static(UPLOAD_FOLDER));
 
 app.use(errorHandling);
 
-const PORT = 3333;
+const PORT = process.env.PORT || 3333;
 app.listen(PORT, () => console.log(`server is running on port ${PORT}`));
